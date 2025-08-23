@@ -17,7 +17,7 @@ function handleSubmit(event) {
   target = form.target.value;
   nums = form.values.value.split(" ").map(Number).filter(Number);
   if (nums.length > 6) {
-    alert("Warning: >6 numbers will take very long.");
+    alert("Warning: >6 numbers may take very long.");
   }
 
   resultContainerElement.style.display = "block";
