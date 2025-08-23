@@ -42,7 +42,7 @@ function handleSubmit(event) {
 function solve(nums) {
   if (solution.length > 0) return;
   if (nums.length == 1) {
-    if (Math.abs(nums[0] - target) < 0.0001) {
+    if (Math.abs(nums[0] - target) < 0.000001) {
       solution = operations.slice();
       solution.push("Got " + target);
     }
