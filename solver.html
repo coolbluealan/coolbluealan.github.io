@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="solver.js" defer></script>
+    <title>24/107 Solver</title>
+  </head>
+  <body>
+    <h1>General solver</h1>
+    Allowed operations are +, -, x, /.
+    <hr />
+    <form onsubmit="handleSubmit(event)">
+      <div>
+        <label for="target"> Target number:</label>
+        <input
+          type="number"
+          id="target"
+          name="target"
+          placeholder="target"
+          required
+        />
+      </div>
+      <div>
+        <label for="values">Space separated list of values:</label>
+        <input
+          type="text"
+          id="values"
+          name="values"
+          placeholder="values"
+          required
+        />
+        (practical limit is 6 for time complexity reasons)
+      </div>
+      <input type="submit" value="Determine solution" />
+    </form>
+    <div id="result-container" style="display: none">
+      <h2>Result</h2>
+      Parsed values:
+      <p id="parsed"></p>
+      <p id="result"></p>
+      <details id="solution-container" style="display: none">
+        <summary style="padding: 1rem; background: #eeeeee; cursor: pointer">
+          View solution steps
+        </summary>
+        <p id="solution"></p>
+      </details>
+    </div>
+  </body>
+</html>
