@@ -12,7 +12,7 @@
   </head>
   <body>
     <h1>General solver</h1>
-    Allowed operations are +, -, x, /.
+    Allowed operations are +, -, x, /. Target must be positive.
     <hr />
     <form onsubmit="handleSubmit(event)">
       <div>
@@ -34,14 +34,12 @@
           placeholder="values"
           required
         />
-        (practical limit is 6 for time complexity reasons)
       </div>
       <input type="submit" value="Determine solution" />
     </form>
     <div id="result-container" style="display: none">
       <h2>Result</h2>
-      Parsed values:
-      <p id="parsed"></p>
+      <p>Parsed values: <span id="parsed"></span></p>
       <p id="result"></p>
       <details id="solution-container" style="display: none">
         <summary style="padding: 1rem; background: #eeeeee; cursor: pointer">

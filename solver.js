@@ -10,37 +10,44 @@ const solutionElement = document.getElementById("solution");
 
 function handleSubmit(event) {
   event.preventDefault();
-  solution = [];
-  operations = [];
-
   const form = event.target;
-  target = form.target.value;
-  nums = form.values.value.split(" ").map(Number).filter(Number);
-  if (nums.length > 6) {
-    alert("Warning: >6 numbers may take very long.");
+  target = form.target.valueAsNumber;
+  const nums = form.values.value.split(" ").map(Number).filter(Number);
+
+  if (
+    nums.length > 6 &&
+    !confirm(`Warning: ${nums.length} numbers may take very long. Proceed?`)
+  )
+    return;
+
+  requestAnimationFrame(() => {
+    resultContainerElement.style.display = "block";
+    parsedElement.innerText = nums.join(", ");
+    resultElement.innerText = "Calculating...";
+    solutionContainerElement.style.display = "none";
+    solutionContainerElement.open = false;
+
+    setTimeout(() => {
+      run(nums);
+    });
+  });
+}
+
+function run(nums) {
+  operations = [];
+  solution = [];
+  solve(nums);
+
+  if (solution.length > 0) {
+    resultElement.innerText = "There exists a solution.";
+    solutionElement.innerText = solution.join("\n");
+    solutionContainerElement.style.display = "block";
+  } else {
+    resultElement.innerText = "No solutions!";
   }
-
-  resultContainerElement.style.display = "block";
-  parsedElement.innerText = nums.join(", ");
-  resultElement.innerText = "Calculating...";
-  solutionContainerElement.style.display = "none";
-  solutionContainerElement.open = false;
-
-  setTimeout(() => {
-    solve(nums);
-
-    if (solution.length > 0) {
-      resultElement.innerText = "There exists a solution.";
-      solutionElement.innerText = solution.join("\n");
-      solutionContainerElement.style.display = "block";
-    } else {
-      resultElement.innerText = "No solutions!";
-    }
-  }, 0);
 }
 
 function solve(nums) {
-  if (solution.length > 0) return;
   if (nums.length == 1) {
     if (Math.abs(nums[0] - target) < 0.000001) {
       solution = operations.slice();
@@ -48,6 +55,7 @@ function solve(nums) {
     }
     return;
   }
+  if (solution.length > 0) return;
 
   for (var i = 0; i < nums.length; i++) {
     for (var j = i + 1; j < nums.length; j++) {
